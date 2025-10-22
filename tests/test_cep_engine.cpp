@@ -87,7 +87,7 @@ TEST_F(CEPEngineTest, CreateCEPEngine) {
     };
     
     // Create CEP engine
-    auto cep_engine = system_->create_cep_engine(
+    auto cep_engine = CEPEngineFactory::create_cep_engine(
         "test_cep",
         monitors,
         dummy_table_,
@@ -112,11 +112,11 @@ TEST_F(CEPEngineTest, AppendEvents) {
     // Define event schemas
     std::vector<EventSchema> event_schemas = {
         {"MarketData", {"symbol", "price", "volume"}, 
-         {arrow::utf8(), arrow::float64(), arrow::int32()}}
+        {arrow::utf8(), arrow::float64(), arrow::int32()}}
     };
     
     // Create CEP engine
-    auto cep_engine = system_->create_cep_engine(
+    auto cep_engine = CEPEngineFactory::create_cep_engine(
         "test_append",
         monitors,
         dummy_table_,
@@ -166,7 +166,7 @@ TEST_F(CEPEngineTest, PriceSpikeDetection) {
     };
     
     // Create CEP engine
-    auto cep_engine = system_->create_cep_engine(
+    auto cep_engine = CEPEngineFactory::create_cep_engine(
         "test_spike",
         monitors,
         dummy_table_,
@@ -217,7 +217,7 @@ TEST_F(CEPEngineTest, Statistics) {
     };
     
     // Create CEP engine
-    auto cep_engine = system_->create_cep_engine(
+    auto cep_engine = CEPEngineFactory::create_cep_engine(
         "test_stats",
         monitors,
         dummy_table_,
