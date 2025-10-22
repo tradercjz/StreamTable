@@ -4,6 +4,7 @@
 
 #include "streaming_compute/streaming_compute.h"
 #include "streaming_compute/cep_patterns.h"
+#include "streaming_compute/cep_engine.h"
 #include <gtest/gtest.h>
 #include <thread>
 #include <chrono>
@@ -31,7 +32,7 @@ protected:
     void SetUp() override {
         // Create streaming system
         StreamConfig config;
-        config.max_memory_mb = 256;
+        config.max_memory_size = 256;
         config.enable_persistence = false;
         
         system_ = std::make_unique<StreamingSystem>(config);
@@ -262,14 +263,19 @@ TEST_F(CEPEngineTest, MultipleSubEngines) {
     };
     
     // Create CEP engine with multiple sub-engines
-    auto cep_engine = system_->create_cep_engine(
+    auto cep_engine = CEPEngineFactory::create_cep_engine(
         "test_multi",
         monitors,
         dummy_table_,
         event_schemas,
         nullptr, // no output table
         "symbol", // dispatch by symbol
-        3         // 3 sub-engines
+        3,         // 3 sub-engines
+	"",
+	"eventTime",
+	true,
+	1024,
+	1
     );
     
     ASSERT_NE(cep_engine, nullptr);

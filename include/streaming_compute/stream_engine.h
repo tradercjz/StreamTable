@@ -5,6 +5,9 @@
 
 namespace streaming_compute {
 
+
+class CEPMonitor;
+class EventSchema;
 /**
  * StreamEngine - Base class for all streaming computation engines
  * 

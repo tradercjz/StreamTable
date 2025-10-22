@@ -32,6 +32,7 @@
 // Infrastructure
 #include "persistence_manager.h"
 #include "monitoring.h"
+#include <any>
 
 namespace streaming_compute {
 

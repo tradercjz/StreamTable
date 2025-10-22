@@ -5,6 +5,7 @@
 #include <thread>
 #include <sstream>
 #include <iomanip>
+#include <any>
 
 namespace streaming_compute {
 

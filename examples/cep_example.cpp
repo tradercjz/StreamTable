@@ -8,6 +8,7 @@
 
 #include "streaming_compute/streaming_compute.h"
 #include "streaming_compute/cep_patterns.h"
+#include "streaming_compute/cep_engine.h"
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -52,7 +53,7 @@ int main() {
     try {
         // Create streaming system
         StreamConfig config;
-        config.max_memory_mb = 1024;
+        config.max_memory_size = 1024;
         config.enable_persistence = false;
         
         StreamingSystem system(config);
@@ -109,7 +110,7 @@ int main() {
         };
         
         // Create CEP engine
-        auto cep_engine = system.create_cep_engine(
+        auto cep_engine = CEPEngineFactory::create_cep_engine(
             "market_cep",
             monitors,
             dummy_table,
