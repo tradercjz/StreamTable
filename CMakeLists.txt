@@ -28,6 +28,7 @@ set(SOURCES
     src/time_series_engine.cpp
     src/reactive_state_engine.cpp
     src/cross_sectional_engine.cpp
+    src/cep_engine.cpp
     src/persistence_manager.cpp
     src/monitoring.cpp
     src/streaming_system.cpp

@@ -210,6 +210,23 @@ public:
         std::shared_ptr<StreamTable> output_table,
         const std::string& key_column = "",
         double threshold = 2.0);
+
+    /**
+     * Create a CEP (Complex Event Processing) engine
+     */
+    static std::shared_ptr<StreamEngine> create_cep_engine(
+        const std::string& name,
+        const std::vector<std::shared_ptr<CEPMonitor>>& monitors,
+        std::shared_ptr<StreamTable> dummy_table,
+        const std::vector<EventSchema>& event_schemas,
+        std::shared_ptr<StreamTable> output_table = nullptr,
+        const std::string& dispatch_key = "",
+        size_t dispatch_bucket = 1,
+        const std::string& time_column = "",
+        const std::string& event_time_field = "eventTime",
+        bool use_system_time = true,
+        size_t event_queue_depth = 1024,
+        size_t deserialize_parallelism = 1);
 };
 
 } // namespace streaming_compute

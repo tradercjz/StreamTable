@@ -27,6 +27,7 @@
 #include "time_series_engine.h"
 #include "reactive_state_engine.h"
 #include "cross_sectional_engine.h"
+#include "cep_engine.h"
 
 // Infrastructure
 #include "persistence_manager.h"
@@ -179,6 +180,36 @@ public:
         const std::string& key_column = "",
         const std::string& triggering_pattern = "keyCount",
         size_t triggering_interval = 1000);
+
+    /**
+     * Create a CEP (Complex Event Processing) engine
+     * @param name Engine name
+     * @param monitors Monitor classes for event handling
+     * @param dummy_table Input table schema reference
+     * @param event_schemas Event schemas definition
+     * @param output_table Output table
+     * @param dispatch_key Key for sub-engine distribution
+     * @param dispatch_bucket Number of sub-engines
+     * @param time_column Time column name
+     * @param event_time_field Event time field name
+     * @param use_system_time Whether to use system time
+     * @param event_queue_depth Event queue depth
+     * @param deserialize_parallelism Deserialization parallelism
+     * @return Shared pointer to the created engine
+     */
+    std::shared_ptr<StreamEngine> create_cep_engine(
+        const std::string& name,
+        const std::vector<std::shared_ptr<CEPMonitor>>& monitors,
+        std::shared_ptr<StreamTable> dummy_table,
+        const std::vector<EventSchema>& event_schemas,
+        std::shared_ptr<StreamTable> output_table = nullptr,
+        const std::string& dispatch_key = "",
+        size_t dispatch_bucket = 1,
+        const std::string& time_column = "",
+        const std::string& event_time_field = "eventTime",
+        bool use_system_time = true,
+        size_t event_queue_depth = 1024,
+        size_t deserialize_parallelism = 1);
 
     /**
      * Drop a stream engine

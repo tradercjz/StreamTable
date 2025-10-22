@@ -11,9 +11,13 @@ if(GTest_FOUND)
     add_executable(test_engines test_engines.cpp)
     target_link_libraries(test_engines streaming_compute Arrow::arrow_shared Threads::Threads GTest::gtest GTest::gtest_main)
     
+    add_executable(test_cep_engine test_cep_engine.cpp)
+    target_link_libraries(test_cep_engine streaming_compute Arrow::arrow_shared Threads::Threads GTest::gtest GTest::gtest_main)
+    
     # Add tests to CTest
     add_test(NAME StreamTableTest COMMAND test_stream_table)
     add_test(NAME EnginesTest COMMAND test_engines)
+    add_test(NAME CEPEngineTest COMMAND test_cep_engine)
 else()
     message(WARNING "GTest not found, skipping tests")
 endif()

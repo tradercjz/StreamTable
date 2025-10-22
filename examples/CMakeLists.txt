@@ -23,3 +23,7 @@ target_link_libraries(complete_system_example streaming_compute Arrow::arrow_sha
 # Performance benchmark
 add_executable(performance_benchmark performance_benchmark.cpp)
 target_link_libraries(performance_benchmark streaming_compute Arrow::arrow_shared Threads::Threads)
+
+# CEP engine example
+add_executable(cep_example cep_example.cpp)
+target_link_libraries(cep_example streaming_compute Arrow::arrow_shared Threads::Threads)
